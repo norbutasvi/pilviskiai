@@ -2,26 +2,47 @@ import Head from 'next/head'
 import Image from 'next/image'
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { getUrl } from '../services/getUrl';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Alert from '@material-ui/lab/Alert';
+import  { motion, AnimatePresence } from 'framer-motion';
 
 export default function Home() {
 
-console.log(process.env.NODE_ENV);
-  const [formData, setFormData] = useState({
+  useEffect(() => {
+    window.addEventListener('scroll', function() {
+      const header = document.querySelector('header');
+      header.classList.toggle('sticky', window.scrollY > 50);
+
+      const responsiveHeader = document.querySelector('.responsive-header');
+      responsiveHeader.classList.toggle('responsive-sticky', window.scrollY > 50);
+    })
+  }, []);
+
+  const [emailSent, setEmailSent] = useState(false);
+  const [isSending, setIsSending] = useState(false);
+
+  const [showResponsiveMenu, setShowResponsiveMenu] = useState(false);
+
+  const initialFormValues = {
     name: '',
     email: '',
     phone: '',
     message: ''
-  })
+  }
 
-  const [errors, setErrors] = useState({
+  const initialErrors = {
     name: false,
     email: false,
     phone: false,
     message: false
-  })
+  }
+
+  const [formData, setFormData] = useState(initialFormValues)
+
+  const [errors, setErrors] = useState(initialErrors)
 
   const handleSendEmail = () => {
     let errors = {
@@ -29,7 +50,8 @@ console.log(process.env.NODE_ENV);
       email: false,
       phone: false,
       message: false
-    }
+    };
+
     let errorArray = [];
     if (formData.name.length < 1) {
       errors.name = true;
@@ -50,8 +72,15 @@ console.log(process.env.NODE_ENV);
     setErrors(errors);
 
     if (errorArray.length < 1) {
+      setIsSending(true);
+
       axios.post(`${getUrl()}/sendmail`)
-      .then(res => console.log(res.data));
+      .then(res => {
+        setIsSending(false);
+        setEmailSent(true);
+        setErrors(initialErrors);
+        setFormData(initialFormValues);
+      });
     }
   }
 
@@ -76,13 +105,47 @@ console.log(process.env.NODE_ENV);
               <img src='https://res.cloudinary.com/dxdmya6ui/image/upload/v1620821646/dazymas_logo_6e09740273.png?1246483.9150000007' />
             </div>
             <ul>
-              <li>APIE MUS</li>
-              <li>PASLAUGOS</li>
+              <a href='#apie-mus'><li>APIE MUS</li></a>
+              <a href='#paslaugos'><li>PASLAUGOS</li></a>
               <li>GALERIJA</li>
-              <li>KONTAKTAI</li>
+              <a href='#kontaktai'><li>KONTAKTAI</li></a>
             </ul>
           </div>
         </header>
+        <div className='responsive-header'>
+          <div className='wrapper'>
+            <div className='logo'>
+              <img src='https://res.cloudinary.com/dxdmya6ui/image/upload/v1620821646/dazymas_logo_6e09740273.png?1246483.9150000007' />
+            </div>
+            <div className='menu-button' onClick={() => setShowResponsiveMenu(true)}>
+              <img src='https://res.cloudinary.com/dxdmya6ui/image/upload/v1620830146/menu_5fa786fcf4.svg?1828102.859999999' />
+            </div>
+          </div>
+        </div>
+
+      <AnimatePresence>
+        {
+          showResponsiveMenu && 
+          <motion.div
+            initial={{ x: '-100%'}}
+            animate={{ x: 0 }}
+            exit={{ x: '-100%'}}
+            transition={{ type: 'Inertia'}}
+            className='nav'
+          >
+            <div className='close-btn' onClick={() => setShowResponsiveMenu(false)}>
+              <img src='https://res.cloudinary.com/dxdmya6ui/image/upload/v1620830689/close_1_5f5b283ba3.svg?2362984.58' />
+            </div>
+            <ul>
+              <a href='#apie-mus' onClick={() => setShowResponsiveMenu(false)}><li>APIE MUS</li></a>
+              <a href='#paslaugos' onClick={() => setShowResponsiveMenu(false)}><li>PASLAUGOS</li></a>
+              <li onClick={() => setShowResponsiveMenu(false)}>GALERIJA</li>
+              <a href='#kontaktai' onClick={() => setShowResponsiveMenu(false)}><li>KONTAKTAI</li></a>
+            </ul>
+          </motion.div>
+        }
+        </AnimatePresence>
+
         <section className='hero-bg' style={{'background-image': `url('https://res.cloudinary.com/dxdmya6ui/image/upload/v1620808395/hero_image_4b319b1b12.jpg?101781.61499999987')`}}>
           <div className='wrapper'>
             <div className='left'>
@@ -94,12 +157,12 @@ console.log(process.env.NODE_ENV);
             <div className='right'>
               <div className='flex-center'>
                 <p>Jei jums reikia ekspertų miltelinio dažymo srityje - mes galime padėti</p>
-                <button>Susisiekti</button>
+                <button><a href='#kontaktai'>Susisiekti</a></button>
               </div>
             </div>
           </div>
         </section>
-        <section className='about-us'>
+        <section className='about-us' id='apie-mus'>
           <div className='wrapper'>
             <div className='left'>
               <h2><img src='https://res.cloudinary.com/dxdmya6ui/image/upload/v1620810788/Daco_2373189_83aa6a1bda.png?93325.09000000027' />Apie mus</h2>
@@ -114,10 +177,10 @@ console.log(process.env.NODE_ENV);
             </div>
           </div>
         </section>
-        <section className='about-us orange-bg'>
+        <section className='about-us orange-bg' id='paslaugos'>
           <div className='wrapper row-reverse'>
             <div className='left'>
-              <h2><img src='https://res.cloudinary.com/dxdmya6ui/image/upload/v1620812848/painter_8b32ec125d.png?2150974.9950000006' />Paslaugos</h2>
+              <h2 className='color-white'><img src='https://res.cloudinary.com/dxdmya6ui/image/upload/v1620812848/painter_8b32ec125d.png?2150974.9950000006' />Paslaugos</h2>
             </div>
             <div className='right color-white'>
             <p>
@@ -150,7 +213,7 @@ console.log(process.env.NODE_ENV);
             </div>
           </div>
         </section>
-        <section className='contact'>
+        <section className='contact' id='kontaktai'>
           <h3>Kontaktai</h3>
           <div className='wrapper'>
             <div className='text'>
@@ -183,25 +246,54 @@ console.log(process.env.NODE_ENV);
           </div>
             <h3>Parašykite mums</h3>
             <div className='form-row'>
-              <TextField error={errors.name} id="filled-basic" onChange={(e) => setFormData({...formData, name: e.target.value})} label="Vardas" variant="filled" />
-              <TextField error={errors.email} id="filled-basic" onChange={(e) => setFormData({...formData, email: e.target.value})} label="El. pašto adresas" variant="filled" />
-              <TextField error={errors.phone} id="filled-basic" onChange={(e) => setFormData({...formData, phone: e.target.value})} label="Tel. numeris" variant="filled" />
+              <TextField value={formData.name} error={errors.name} id="filled-basic" onChange={(e) => setFormData({...formData, name: e.target.value})} label="Vardas" variant="filled" />
+              <TextField value={formData.email} error={errors.email} id="filled-basic" onChange={(e) => setFormData({...formData, email: e.target.value})} label="El. pašto adresas" variant="filled" />
+              <TextField value={formData.phone} error={errors.phone} id="filled-basic" onChange={(e) => setFormData({...formData, phone: e.target.value})} label="Tel. numeris" variant="filled" />
             </div>
             <div className='field-fullwidth'>
               <TextField id="filled-basic" 
                 multiline
+                value={formData.message}
                 error={errors.message}
                 rows={5}
                 rowsMax={7} 
                 onChange={(e) => setFormData({...formData, message: e.target.value})} 
                 label="Žinutė" 
                 variant="filled" />
-              <Button variant="outlined" onClick={() => handleSendEmail()}>SIŲSTI ŽIN</Button>
+              <Button variant="outlined" disabled={isSending}onClick={() => handleSendEmail()}>SIŲSTI</Button><br />
+              {/* <div className='email-loader'><CircularProgress /></div> */}
+              { isSending && <div className='email-loader'><CircularProgress /></div>}
+              { emailSent && <div className='success-msg'><Alert severity="success">Žinutė sėkmingai išsiųsta. Susisieksime jūsų nurodytais kontaktais artimiausiu metu.</Alert></div>}
             </div>
         </section>
       </main>
       <footer>
-        Footer
+        <div className='wrapper'>
+          <div className='left'>
+            <div className='col'>
+              <h3>KOKYBĖ</h3>
+              <img src='https://res.cloudinary.com/dxdmya6ui/image/upload/v1620814203/quality_1a7b9f8259.svg?30002.050000000963' />
+            </div>
+            <div className='col'>
+              <h3>PATIRTIS</h3>
+              <img src='https://res.cloudinary.com/dxdmya6ui/image/upload/v1620828368/experience_fe21e96e9d.svg?62401.52500000113' />
+            </div>
+            <div className='col'>
+              <h3>KAINA</h3>
+              <img src='https://res.cloudinary.com/dxdmya6ui/image/upload/v1620814464/price_tag_dc5b495518.svg?271084.12000000133' />
+            </div>
+          </div>
+          <div className='right'>
+            <p>
+              UAB "Miltelinis dažymas Pilviškiuose"<br />
+              <b>Įmonės kodas: </b>304998962<br />
+              <b>Telefonas: </b>861036444<br />
+              <b>El. paštas: </b>miltelinisdp@gmail.com<br />
+              <b>Adresas: </b>Klaipėdos g. 127, Kretinga
+            </p>
+            <img src='https://res.cloudinary.com/dxdmya6ui/image/upload/v1620821646/dazymas_logo_6e09740273.png?1246483.9150000007' />
+          </div>
+        </div>
       </footer>
     </div>
   )

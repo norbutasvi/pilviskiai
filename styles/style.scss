@@ -1,5 +1,26 @@
+@mixin tablet {
+    @media only screen and (max-width: 1040px) {
+        @content;
+    }
+}
+
+@mixin phone {
+    @media only screen and (max-width: 600px) {
+        @content;
+    }
+}
+
 *, *::after, *::before {
     box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
 }
 
 body {
@@ -16,6 +37,11 @@ ul {
 .wrapper {
     width: 80%;
     margin: 0 auto;
+    max-width: 1270px;
+
+    @include phone {
+        width: 90%;
+    }
 }
 
 .orange-bg {
@@ -31,8 +57,45 @@ ul {
     flex-direction: row-reverse;
 }
 
-header {
+.sticky {
+    background: rgba(255,255,255,1);
+    border-bottom: 5px solid #D75923;
+
+    .wrapper {
+        .logo {
+            img {
+                width: 150px;
+            }
+        }
+    }
+}
+
+.responsive-sticky {
     
+    border-bottom: 5px solid #D75923;
+
+    .wrapper {
+        .logo {
+            img {
+                width: 100px;
+            }
+        }
+    }
+}
+
+.responsive-header {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(255,255,255,1);
+    transition: 0.5s;
+
+    @include phone {
+        display: block;
+        transition: 0.5s;
+    }
     .wrapper {
         display: flex;
         align-items: center;
@@ -40,22 +103,95 @@ header {
 
         .logo {
             img {
+                width: 150px;
+                transition: 0.5s;
+            }
+        }
+
+        .menu-button {
+            img {
+                width: 50px;
+            }
+        }
+    }
+}
+
+.nav {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+    z-index: 3;
+
+    @include phone {
+        display: flex;
+    }
+
+    .close-btn {
+        position: absolute;
+        right: 0px;
+        top: 0px;
+        margin: 20px;
+
+        img {
+            width: 40px;
+        }
+    }
+
+    ul {
+        li {
+            margin: 10px;
+            font-size: 20px;
+        }
+    }
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    transition: 0.6s;
+    background: rgba(255,255,255,1);
+
+    @include phone {
+        display: none;
+    }
+    
+    .wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .logo {
+            transition: 0.6s;
+
+            img {
+                position: relative;
                 width: 300px;
+                transition: 0.5s;
             }
         }
     
         ul {
             display: flex;
+            position: relative;
     
             li {
                 margin-right: 10px;
-                font-weight: 600;
+                font-weight: 200;
                 font-size: 20px;
                 padding: 10px;
-                background: black;;
-                border-radius: 5px;
+                background: black;
                 color: white;
                 cursor: pointer;
+                position: relative;
 
                 &:hover {
                     background: #ECB27D;
@@ -67,14 +203,24 @@ header {
 }
 
 .hero-bg {
+    margin-top: 132px;
     height: 500px;
     background-size: cover;
     background-position: center;
+
+    @include phone {
+        margin-top: 68px;
+    }
 
     .wrapper {
         display: flex;
         align-items: center;
         height: 100%;
+
+        @include phone {
+            flex-direction: column;
+            width: 100%;
+        }
 
         .left {
             color: white;
@@ -84,9 +230,15 @@ header {
             justify-content: center;
             align-items: center;
 
+            @include phone {
+                // width: 100%;
+                height: 100%;
+            }
+
             h2 {
                 font-size: 40px;
                 margin: 0;
+
             }
 
             span {
@@ -105,6 +257,10 @@ header {
             align-items: center;
             background: rgba(0,0,0,0.3);
             height: 100%;
+
+            @include phone {
+                width: 100%;
+            }
 
             .flex-center {
                 width: 80%;
@@ -139,8 +295,17 @@ header {
         display: flex;
         align-items: center;
 
+        @include phone {
+            flex-direction: column;
+            width: 100%;
+        }
+
         .left {
             width: 50%;
+
+            @include phone {
+                width: 100%;
+            }
 
             h2 {
                 display: flex;
@@ -163,6 +328,10 @@ header {
             flex-direction: column;
             align-items: center;
 
+            @include phone {
+                width: 100%;
+            }
+
             p {
                 font-size: 20px;
                 width: 80%;
@@ -184,11 +353,24 @@ header {
     .wrapper {
         display: flex;
 
+        @include phone {
+            flex-direction: column;
+        }
+
         .item {
             width: 33%;
             display: flex;
             flex-direction: column;
             align-items: center;
+
+            @include phone {
+                width: 100%;
+                margin-bottom: 30px;
+
+                &:last-child {
+                    margin-bottom: 0px;
+                }
+            }
 
             img {
                 height: 70px;
@@ -205,6 +387,7 @@ header {
 .contact {
     padding: 40px 0px;
     background: #ECB27D;
+    color: white;
 
     h3 {
         text-align: center;
@@ -215,9 +398,17 @@ header {
     .wrapper {
         display: flex;
 
+        @include phone {
+            flex-direction: column;
+        }
+
         .text {
             width: 50%;
             text-align: center;
+
+            @include phone {
+                width: 100%;
+            }
 
             p {
                 margin: 0;
@@ -236,29 +427,51 @@ header {
         .map {
             width: 50%;
 
+            @include phone {
+                width: 100%;
+            }
+
             iframe {
                 width: 100%;
                 height: 450px;
                 border: 0;
+
+                @include phone {
+                    height: 400px;
+                }
             }
         }
     }
 
     .form-row {
-        width: 70%;
+        width: 80%;
         margin: 0 auto;
         display: flex;
         justify-content: space-between;
 
+        @include phone {
+            flex-direction: column;
+            
+        }
+
         .MuiFormControl-root {
             width: 30%;
+
+            @include phone {
+                width: 100%;
+                margin-bottom: 5px;
+            }
         }
     }
 
     .field-fullwidth {
-        width: 70%;
+        width: 80%;
         margin: 0 auto;
         margin-top: 1.5%;
+
+        @include phone {
+            margin-top: 0px;
+        }
 
         .MuiFormControl-root {
             width: 100%;
@@ -270,3 +483,68 @@ header {
     }
 }
 
+.email-loader, .success-msg {
+    margin-top: 10px;
+}
+
+footer {
+    padding: 20px 0px;
+    font-size: 90%;
+
+    .wrapper {
+        width: 80%;
+        display: flex;
+
+        @include phone {
+            flex-direction: column;
+        }
+
+        .left {
+            display: flex;
+            align-items: center;
+            width: 30%;
+
+            @include phone {
+                display: none;
+            }
+
+            .col {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin-right: 20px;
+    
+                h3 {
+                    font-weight: 300;
+                }
+    
+                img {
+                    height: 100px;
+                }
+            }
+        }
+
+        .right {
+            width: 70%;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            
+
+            @include phone {
+                width: 100%;
+                flex-direction: column-reverse;
+                align-items: flex-start;
+            }
+
+            p {
+                margin: 0px;
+            }
+            
+            img {
+                width: 300px;
+                align-self: center;
+            }
+        }
+    }
+}
