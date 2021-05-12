@@ -196,7 +196,7 @@ console.log(process.env.NODE_ENV);
                 onChange={(e) => setFormData({...formData, message: e.target.value})} 
                 label="Žinutė" 
                 variant="filled" />
-              <Button variant="outlined" onClick={() => handleSendEmail()}>SIŲSTI</Button>
+              <Button variant="outlined" onClick={() => handleSendEmail()}>SIŲSTI ŽINUTĘ</Button>
             </div>
         </section>
       </main>
