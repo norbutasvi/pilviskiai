@@ -268,15 +268,19 @@ header .wrapper ul li:hover {
   }
 }
 
-.hero-bg .wrapper .left h2 {
-  font-size: 40px;
-  margin: 0;
+.hero-bg .wrapper .left .hero-text {
+  line-height: 25px;
 }
 
-.hero-bg .wrapper .left span {
-  font-weight: 200;
+.hero-bg .wrapper .left h1 {
+  font-size: 40px;
+  margin: 0px;
+}
+
+.hero-bg .wrapper .left p {
+  padding: 0;
+  margin: 0;
   font-size: 25px;
-  line-height: 14px;
 }
 
 .hero-bg .wrapper .right {
@@ -534,6 +538,10 @@ header .wrapper ul li:hover {
   .contact .wrapper .map iframe {
     height: 400px;
   }
+}
+
+.contact .write-us {
+  font-size: 30px;
 }
 
 .contact .form-row {

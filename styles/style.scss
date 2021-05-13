@@ -48,7 +48,6 @@ ul {
     background: #D75923;
 }
 
-
 .color-white {
     color: white;
 }
@@ -235,18 +234,35 @@ header {
                 height: 100%;
             }
 
-            h2 {
+            .hero-text {
+                line-height: 25px;
+            }
+
+            h1 {
                 font-size: 40px;
+                margin: 0px;
+            }
+
+            p {
+                padding: 0;
                 margin: 0;
-
-            }
-
-            span {
-                font-weight: 200;
                 font-size: 25px;
-                line-height: 14px;
             }
+
+            // h2 {
+            //     font-size: 40px;
+            //     margin: 0;
+
+            // }
+
+            // span {
+            //     font-weight: 200;
+            //     font-size: 25px;
+            //     line-height: 14px;
+            // }
         }
+
+        
 
         .right {
             color: white;
@@ -441,6 +457,10 @@ header {
                 }
             }
         }
+    }
+
+    .write-us {
+        font-size: 30px;
     }
 
     .form-row {
