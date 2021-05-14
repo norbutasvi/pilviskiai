@@ -467,6 +467,45 @@ header .wrapper ul li:hover {
   text-align: center;
 }
 
+.es-projects {
+  background-color: #D75923;
+  padding: 40px 0px;
+  color: white;
+}
+
+.es-projects h2 {
+  text-align: center;
+  letter-spacing: 5px;
+  font-size: 40px;
+}
+
+.es-projects .wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.es-projects .wrapper img {
+  max-width: 50%;
+}
+
+@media only screen and (max-width: 600px) {
+  .es-projects .wrapper img {
+    max-width: 100%;
+  }
+}
+
+.es-projects .wrapper p {
+  text-align: center;
+}
+
 .contact {
   padding: 40px 0px;
   background: #ECB27D;

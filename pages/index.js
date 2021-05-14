@@ -26,8 +26,6 @@ export async function getServerSideProps(context) {
 
 export default function Home({ pageData }) {
 
-  console.log(pageData);
-
   useEffect(() => {
     window.addEventListener('scroll', function() {
       const header = document.querySelector('header');
@@ -236,6 +234,10 @@ export default function Home({ pageData }) {
               </div>
               )}
           </div>
+        </section>
+        <section className='es-projects' id='es-projektai'>
+          <h2>ES PROJEKTAI</h2>
+            <div className='wrapper' dangerouslySetInnerHTML={{__html: `${marked(pageData.es_projektai)}`}}></div>
         </section>
         <section className='contact' id='kontaktai'>
           <h3>Kontaktai</h3>
