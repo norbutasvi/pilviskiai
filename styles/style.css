@@ -587,6 +587,8 @@ header .wrapper ul li:hover {
 }
 
 .gallery h2 {
+  font-size: 40px;
+  letter-spacing: 5px;
   text-align: center;
 }
 

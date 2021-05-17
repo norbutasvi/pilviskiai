@@ -35,8 +35,6 @@ export async function getServerSideProps(context) {
 
 export default function Home({ pageData }) {
 
-  console.log(pageData.paveiksleliu_galerija);
-
   useEffect(() => {
     window.addEventListener('scroll', function() {
       const header = document.querySelector('header');
@@ -148,17 +146,8 @@ export default function Home({ pageData }) {
             <div className='close-btn' onClick={() => setShowModal(false)}>
               <img src='https://res.cloudinary.com/dxdmya6ui/image/upload/v1621240442/cancel_01a1e66ba7.svg?84587.94999995735' />
             </div>
-            {/* <div className='modal-image'>
-              { modalImage && <img src={modalImage} />}
-            </div> */}
             
             <Swiper navigation={true} className="mySwiper">
-              {/* <SwiperSlide>
-                { modalImage && <img src={modalImage} />}
-              </SwiperSlide>
-              <SwiperSlide>
-                { modalImage && <img src={modalImage} />}
-              </SwiperSlide> */}
               <SwiperSlide>
                 { modalImage && <img src={modalImage} />}
               </SwiperSlide>
@@ -167,11 +156,6 @@ export default function Home({ pageData }) {
                   <SwiperSlide>
                     <img src={image.url} />
                   </SwiperSlide>
-                  // <div 
-                  //   className='background-item' 
-                  //   onClick={() => handleModal(image.url)} 
-                  //   style={{backgroundImage:`url(${image.url}`}}>
-                  // </div>
                 )
               }
             </Swiper>
@@ -188,7 +172,7 @@ export default function Home({ pageData }) {
               <a href='#apie-mus'><li>APIE MUS</li></a>
               <a href='#paslaugos'><li>PASLAUGOS</li></a>
               <a href='#es-projektai'><li>ES PROJEKTAI</li></a>
-              <li>GALERIJA</li>
+              <a href='#galerija'><li>GALERIJA</li></a>
               <a href='#kontaktai'><li>KONTAKTAI</li></a>
             </ul>
           </div>
@@ -232,14 +216,11 @@ export default function Home({ pageData }) {
           <div className='wrapper'>
             <div className='left'>
               <div className='flex-center'>
-                {/* <h2>Miltelinis dažymas</h2>
-                <span>Pilviškiuose</span> */}
                 <div className='hero-text' dangerouslySetInnerHTML={{__html: `${marked(pageData.puslapio_pavadinimas)}`}}></div>
               </div>
             </div>
             <div className='right'>
               <div className='flex-center'>
-                {/* <p>Jei jums reikia ekspertų miltelinio dažymo srityje - mes galime padėti</p> */}
                 <div dangerouslySetInnerHTML={{__html: `${marked(pageData.paveikslelio_aprasymas)}`}}></div>
                 <button><a href='#kontaktai'>Susisiekti</a></button>
               </div>
@@ -259,36 +240,12 @@ export default function Home({ pageData }) {
             <div className='left'>
               <h2 className='color-white'><img src='https://res.cloudinary.com/dxdmya6ui/image/upload/v1620812848/painter_8b32ec125d.png?2150974.9950000006' />Paslaugos</h2>
             </div>
-            {/* <div className='right color-white'>
-            <p>
-            Proceso metu padengiame gaminį dekoratyvine ir apsaugine danga. Tokiu būdu gaminys apsaugomas nuo karščio, šalčio, braižymo, korozijos, balimo ir kitų oro 
-            sąlygų poveikio. Miltelinio dažymo paslaugas  teikiame  įmonėms, kurios  užsiima gamyba  iš juodojo metalo, cinkuoto metalo, aliuminio, švino, vario, nerūdijančio plieno ir kitų metalų.
-            </p>
-            <p>
-            Taip pat  apdirbame  ir  milteliniu  būdu  dažome stambiagabaritines detales (konstrukcijas): plieno lakštus, sijas; bei kitas detales.  Tai ypač aktualu įmonėms,  dirbančioms statybos,  metalo, statybos  medžiagų,  sodo  reikmenų  ir su  tuo  susijusiuose  sektoriuose.
-            </p>
-            </div> */}
             <div className='right color-white' dangerouslySetInnerHTML={{__html: `${marked(pageData.paslaugos)}`}}></div>
           </div>
         </section>
         <section className='why-us'>
           <h2>Kodėl rinktis mus?</h2>
           <div className='wrapper'>
-            {/* <div className='item'>
-              <img src='https://res.cloudinary.com/dxdmya6ui/image/upload/v1620814203/quality_1a7b9f8259.svg?30002.050000000963' />
-              <h3>Kokybė</h3>
-              <p>Mes galime Jums pasiūlyti itin kokybiškas dengimo paslaugas. Nuo miltelinio dažymo iki dažymo purškiant, galime užtikrinti, kad gaminio paviršius išliks patvarus ir atsparus korozijai.</p>
-            </div>
-            <div className='item'>
-              <img src='https://res.cloudinary.com/dxdmya6ui/image/upload/v1620814319/innovation_f6f17129e2.svg?127764.25500000005' />
-              <h3>Inovatyvumas</h3>
-              <p>Įmonė  naudoja visiškai  naują, modernią įrangą, inovatyvią miltelinio  dažymo  rinkos  mastu, kuri užtikrina ergonomišką, kokybišką, draugišką aplinkai gamybinių paslaugų teikimą, leidžiančią taupyti žaliavas, elektros energiją bei žmogiškuosius resursus, sudarant sąlygas  aukštai darbų saugai, našesnei gamybai bei puikias  sąlygas dirbantiesiems.</p>
-            </div>
-            <div className='item'>
-              <img src='https://res.cloudinary.com/dxdmya6ui/image/upload/v1620814464/price_tag_dc5b495518.svg?271084.12000000133' />
-              <h3>Prieinama kaina</h3>
-              <p>Mes garantuojame, kad už atliktas paslaugas nepermokėsite.</p>
-            </div> */}
             {pageData.kodel_mes.map(item => 
               <div className='item'>
                 <img src={item.ikona.url} />
@@ -305,19 +262,21 @@ export default function Home({ pageData }) {
         <section className='gallery' id='galerija'>
           <h2>GALERIJA</h2>
           <div className='wrapper'>
-            <div className='images-container'>
-              { 
+          { 
               pageData.paveiksleliu_galerija.length > 0 ? 
-                pageData.paveiksleliu_galerija.map(image => 
+              <div className='images-container'>
+                {
+                  pageData.paveiksleliu_galerija.map(image => 
                   <div 
                     className='background-item' 
                     onClick={() => handleModal(image.url)} 
                     style={{backgroundImage:`url(${image.url}`}}>
                   </div>
-                ) :
-                <p style={{textAlign: 'center'}}>Nuotraukų galerijos informacija ruošiama.</p>
-              }
-            </div>
+                  )
+                }
+              </div> :
+              <p style={{textAlign:'center'}}>Nuotraukų galerija ruošiama.</p>
+          }
           </div>
         </section>
         <section className='contact' id='kontaktai'>
@@ -368,7 +327,6 @@ export default function Home({ pageData }) {
                 label="Žinutė" 
                 variant="filled" />
               <Button variant="outlined" disabled={isSending}onClick={() => handleSendEmail()}>SIŲSTI</Button><br />
-              {/* <div className='email-loader'><CircularProgress /></div> */}
               { isSending && <div className='email-loader'><CircularProgress /></div>}
               { emailSent && <div className='success-msg'><Alert severity="success">Žinutė sėkmingai išsiųsta. Susisieksime jūsų nurodytais kontaktais artimiausiu metu.</Alert></div>}
             </div>
