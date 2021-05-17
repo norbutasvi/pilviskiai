@@ -152,6 +152,82 @@ ul {
   font-size: 20px;
 }
 
+.swiper-slide {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.swiper-slide img {
+  max-width: 80%;
+  max-height: 80%;
+}
+
+.swiper-container {
+  height: 100%;
+}
+
+.swiper-button-next:after {
+  color: #D75923;
+}
+
+.swiper-button-prev:after {
+  color: #D75923;
+}
+
+.modal {
+  background: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+}
+
+.modal .close-btn {
+  position: absolute;
+  right: 0;
+  margin: 40px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.modal .close-btn img {
+  height: 50px;
+}
+
+.modal .modal-image {
+  height: 100%;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.modal .modal-image img {
+  max-width: 80%;
+  max-height: 80%;
+}
+
+.modal .images-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
 header {
   position: fixed;
   top: 0;
@@ -504,6 +580,51 @@ header .wrapper ul li:hover {
 
 .es-projects .wrapper p {
   text-align: center;
+}
+
+.gallery {
+  padding: 40px 0px;
+}
+
+.gallery h2 {
+  text-align: center;
+}
+
+.gallery .images-container {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+  place-items: center;
+}
+
+@media only screen and (max-width: 600px) {
+  .gallery .images-container {
+    -ms-grid-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
+  }
+}
+
+.gallery .images-container .item {
+  width: 200px;
+  height: 200px;
+  border: 1px solid black;
+}
+
+.gallery .images-container .item img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+  cursor: pointer;
+}
+
+.gallery .images-container .background-item {
+  background-image: url(https://unsplash.it/1200/700);
+  background-position: center;
+  background-size: cover;
+  width: 200px;
+  height: 200px;
 }
 
 .contact {

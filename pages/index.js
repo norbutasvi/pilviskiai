@@ -2,13 +2,22 @@ import Head from 'next/head'
 import Image from 'next/image'
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { getUrl } from '../services/getUrl';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Alert from '@material-ui/lab/Alert';
 import  { motion, AnimatePresence } from 'framer-motion';
 import marked from 'marked';
+// Import Swiper React components
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/swiper.min.css";
+import "swiper/components/navigation/navigation.min.css"
+import SwiperCore, {
+  Navigation
+} from 'swiper/core';
+
+SwiperCore.use([Navigation]);
 
 export async function getServerSideProps(context) {
 
@@ -26,6 +35,8 @@ export async function getServerSideProps(context) {
 
 export default function Home({ pageData }) {
 
+  console.log(pageData.paveiksleliu_galerija);
+
   useEffect(() => {
     window.addEventListener('scroll', function() {
       const header = document.querySelector('header');
@@ -38,6 +49,8 @@ export default function Home({ pageData }) {
 
   const [emailSent, setEmailSent] = useState(false);
   const [isSending, setIsSending] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [modalImage, setModalImage] = useState(null);
 
   const [showResponsiveMenu, setShowResponsiveMenu] = useState(false);
 
@@ -101,6 +114,11 @@ export default function Home({ pageData }) {
     }
   }
 
+  const handleModal = (imageSrc) => {
+      setShowModal(true);
+      setModalImage(imageSrc);
+  }
+
   return (
     <div>
       <Head>
@@ -116,6 +134,51 @@ export default function Home({ pageData }) {
       </Head>
 
       <main>
+
+      <AnimatePresence>
+        {
+          showModal && 
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{  opacity: 0 }}
+            transition={{ type: 'Inertia'}}
+            className='modal'
+          >
+            <div className='close-btn' onClick={() => setShowModal(false)}>
+              <img src='https://res.cloudinary.com/dxdmya6ui/image/upload/v1621240442/cancel_01a1e66ba7.svg?84587.94999995735' />
+            </div>
+            {/* <div className='modal-image'>
+              { modalImage && <img src={modalImage} />}
+            </div> */}
+            
+            <Swiper navigation={true} className="mySwiper">
+              {/* <SwiperSlide>
+                { modalImage && <img src={modalImage} />}
+              </SwiperSlide>
+              <SwiperSlide>
+                { modalImage && <img src={modalImage} />}
+              </SwiperSlide> */}
+              <SwiperSlide>
+                { modalImage && <img src={modalImage} />}
+              </SwiperSlide>
+              {
+                pageData.paveiksleliu_galerija.map(image => 
+                  <SwiperSlide>
+                    <img src={image.url} />
+                  </SwiperSlide>
+                  // <div 
+                  //   className='background-item' 
+                  //   onClick={() => handleModal(image.url)} 
+                  //   style={{backgroundImage:`url(${image.url}`}}>
+                  // </div>
+                )
+              }
+            </Swiper>
+          </motion.div>
+        }
+        </AnimatePresence>
+
         <header>
           <div className='wrapper'>
             <div className='logo'>
@@ -238,6 +301,24 @@ export default function Home({ pageData }) {
         <section className='es-projects' id='es-projektai'>
           <h2>ES PROJEKTAI</h2>
             <div className='wrapper' dangerouslySetInnerHTML={{__html: `${marked(pageData.es_projektai)}`}}></div>
+        </section>
+        <section className='gallery' id='galerija'>
+          <h2>GALERIJA</h2>
+          <div className='wrapper'>
+            <div className='images-container'>
+              { 
+              pageData.paveiksleliu_galerija.length > 0 ? 
+                pageData.paveiksleliu_galerija.map(image => 
+                  <div 
+                    className='background-item' 
+                    onClick={() => handleModal(image.url)} 
+                    style={{backgroundImage:`url(${image.url}`}}>
+                  </div>
+                ) :
+                <p style={{textAlign: 'center'}}>Nuotraukų galerijos informacija ruošiama.</p>
+              }
+            </div>
+          </div>
         </section>
         <section className='contact' id='kontaktai'>
           <h3>Kontaktai</h3>
