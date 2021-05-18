@@ -172,6 +172,22 @@ ul {
     color: #D75923;
 }
 
+.swiper-button-next {
+    right: 50px !important;
+
+    @include phone {
+        right: 10px !important;
+    }
+}
+
+.swiper-button-prev {
+    left: 50px !important;
+
+    @include phone {
+        left: 10px !important;
+    }
+}
+
 .swiper-button-prev:after {
     color: #D75923;
 }
@@ -193,7 +209,7 @@ ul {
         z-index: 10;
 
         img {
-            height: 50px;
+            height: 35px;
         }
     }
 
@@ -413,7 +429,7 @@ header {
             }
 
             p {
-                font-size: 20px;
+                // font-size: 20px;
                 width: 80%;
                 text-align: center;
             }
@@ -533,6 +549,7 @@ header {
             background-size: cover;
             width: 200px;
             height: 200px;
+            cursor: pointer;
         }
     }
 }

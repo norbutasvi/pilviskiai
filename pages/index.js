@@ -49,6 +49,7 @@ export default function Home({ pageData }) {
   const [isSending, setIsSending] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [modalImage, setModalImage] = useState(null);
+  const [galleryImages, setGalleryImages] = useState([]);
 
   const [showResponsiveMenu, setShowResponsiveMenu] = useState(false);
 
@@ -99,9 +100,8 @@ export default function Home({ pageData }) {
 
     if (errorArray.length < 1) {
       setIsSending(true);
-      console.log(getUrl());
 
-      axios.post(`${getUrl()}/sendmail`)
+      axios.post(`${getUrl()}/sendmail`, formData)
       .then(res => {
         setIsSending(false);
         setEmailSent(true);
@@ -114,20 +114,30 @@ export default function Home({ pageData }) {
 
   const handleModal = (imageSrc) => {
       setShowModal(true);
-      setModalImage(imageSrc);
+      // setModalImage(imageSrc);
+      recreateImageGallery(imageSrc);
+  }
+
+  const recreateImageGallery = (newImageUrl) => {
+    const imagesGallery = pageData.paveiksleliu_galerija.map(image => image.url);
+    const imagesGalleryWithRemovedImage = imagesGallery.filter(image => image !== newImageUrl);
+    imagesGalleryWithRemovedImage.unshift(newImageUrl);
+
+    setGalleryImages(imagesGalleryWithRemovedImage);
   }
 
   return (
     <div>
       <Head>
         <title>Miltelinis dažymas Pilviškiuose</title>
-        <meta name="description" content="Miltelinis dažymas Pilviškiuose" />
+        <meta name="description" content="powcoating.lt - Miltelinis dažymas Pilviškiuose" />
         <link rel="icon" href="/favicon.ico" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <meta
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
+        <meta name="keywords" content="miltelinis, dazymas, pilviskiuose, powcoating.lt" />
         <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800&display=swap" rel="stylesheet" />
       </Head>
 
@@ -148,13 +158,13 @@ export default function Home({ pageData }) {
             </div>
             
             <Swiper navigation={true} className="mySwiper">
-              <SwiperSlide>
+              {/* <SwiperSlide>
                 { modalImage && <img src={modalImage} />}
-              </SwiperSlide>
+              </SwiperSlide> */}
               {
-                pageData.paveiksleliu_galerija.map(image => 
+                galleryImages.map(image => 
                   <SwiperSlide>
-                    <img src={image.url} />
+                    <img src={image} />
                   </SwiperSlide>
                 )
               }
@@ -205,7 +215,7 @@ export default function Home({ pageData }) {
               <a href='#apie-mus' onClick={() => setShowResponsiveMenu(false)}><li>APIE MUS</li></a>
               <a href='#paslaugos' onClick={() => setShowResponsiveMenu(false)}><li>PASLAUGOS</li></a>
               <a href='#es-projektai' onClick={() => setShowResponsiveMenu(false)}><li>ES PROJEKTAI</li></a>
-              <li onClick={() => setShowResponsiveMenu(false)}>GALERIJA</li>
+              <a href='#galerija' onClick={() => setShowResponsiveMenu(false)}><li>GALERIJA</li></a>
               <a href='#kontaktai' onClick={() => setShowResponsiveMenu(false)}><li>KONTAKTAI</li></a>
             </ul>
           </motion.div>
@@ -359,6 +369,7 @@ export default function Home({ pageData }) {
             <img src='https://res.cloudinary.com/dxdmya6ui/image/upload/v1620821646/dazymas_logo_6e09740273.png?1246483.9150000007' />
           </div>
         </div>
+        <p style={{ textAlign: 'center' }}>© {new Date().getFullYear()}. Visos teisės saugomos.<br />Sprendimas <a href='https://northweb.lt'>northweb.lt</a></p>
       </footer>
     </div>
   )

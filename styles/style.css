@@ -177,6 +177,26 @@ ul {
   color: #D75923;
 }
 
+.swiper-button-next {
+  right: 50px !important;
+}
+
+@media only screen and (max-width: 600px) {
+  .swiper-button-next {
+    right: 10px !important;
+  }
+}
+
+.swiper-button-prev {
+  left: 50px !important;
+}
+
+@media only screen and (max-width: 600px) {
+  .swiper-button-prev {
+    left: 10px !important;
+  }
+}
+
 .swiper-button-prev:after {
   color: #D75923;
 }
@@ -200,7 +220,7 @@ ul {
 }
 
 .modal .close-btn img {
-  height: 50px;
+  height: 35px;
 }
 
 .modal .modal-image {
@@ -481,7 +501,6 @@ header .wrapper ul li:hover {
 }
 
 .about-us .wrapper .right p {
-  font-size: 20px;
   width: 80%;
   text-align: center;
 }
@@ -627,6 +646,7 @@ header .wrapper ul li:hover {
   background-size: cover;
   width: 200px;
   height: 200px;
+  cursor: pointer;
 }
 
 .contact {
