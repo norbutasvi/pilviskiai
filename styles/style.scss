@@ -44,8 +44,8 @@ ul {
     }
 }
 
-.orange-bg {
-    background: #D75923;
+.light-blue-bg {
+    background: linear-gradient(to right, #19396E, #377BED);
 }
 
 .color-white {
@@ -58,12 +58,12 @@ ul {
 
 .sticky {
     background: rgba(255,255,255,1);
-    border-bottom: 5px solid #D75923;
+    border-bottom: 5px solid #19396E;
 
     .wrapper {
         .logo {
             img {
-                width: 150px;
+                width: 180px;
             }
         }
     }
@@ -71,7 +71,7 @@ ul {
 
 .responsive-sticky {
     
-    border-bottom: 5px solid #D75923;
+    border-bottom: 5px solid #19396E;
 
     .wrapper {
         .logo {
@@ -273,8 +273,7 @@ header {
                 position: relative;
 
                 &:hover {
-                    background: #ECB27D;
-                    color: black;
+                    background: #19396E;
                 }
             }
         }
@@ -282,13 +281,13 @@ header {
 }
 
 .hero-bg {
-    margin-top: 132px;
+    margin-top: 90px;
     height: 500px;
     background-size: cover;
     background-position: center;
 
     @include phone {
-        margin-top: 68px;
+        margin-top: 54px;
     }
 
     .wrapper {
@@ -371,7 +370,7 @@ header {
 
                 button {
                     margin-top: 10px;
-                    background: #D75923;
+                    background: #19396E;
                     border: none;
                     color: white;
                     padding: 10px;
@@ -481,7 +480,7 @@ header {
 }
 
 .es-projects {
-    background-color: #D75923;
+    background: linear-gradient(to left, #19396E, #377BED);
     padding: 40px 0px;
     color: white;
 
@@ -556,7 +555,7 @@ header {
 
 .contact {
     padding: 40px 0px;
-    background: #ECB27D;
+    background: #377BED;
     color: white;
 
     h3 {
@@ -654,6 +653,22 @@ header {
         button {
             margin-top: 1.5%;
         }
+    }
+
+    .MuiFormLabel-root {
+        color: white;
+    }
+
+    .MuiButton-label {
+        color: white;
+    }
+
+    .MuiFilledInput-input {
+       color: rgb(181, 207, 255); 
+    }
+
+    .MuiFormLabel-root.Mui-focused {
+        color: white;
     }
 }
 

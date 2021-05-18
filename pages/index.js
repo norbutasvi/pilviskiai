@@ -129,15 +129,15 @@ export default function Home({ pageData }) {
   return (
     <div>
       <Head>
-        <title>Miltelinis dažymas Pilviškiuose</title>
-        <meta name="description" content="powcoating.lt - Miltelinis dažymas Pilviškiuose" />
+        <title>Šratavimas Pilviškiuose</title>
+        <meta name="description" content="blasting.lt - Šratavimas Pilviškiuose" />
         <link rel="icon" href="/favicon.ico" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <meta
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
-        <meta name="keywords" content="miltelinis, dazymas, pilviskiuose, powcoating.lt" />
+        <meta name="keywords" content="sratavimas, pilviskiuose, blasting.lt" />
         <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800&display=swap" rel="stylesheet" />
       </Head>
 
@@ -176,7 +176,7 @@ export default function Home({ pageData }) {
         <header>
           <div className='wrapper'>
             <div className='logo'>
-              <img src='https://res.cloudinary.com/dxdmya6ui/image/upload/v1620821646/dazymas_logo_6e09740273.png?1246483.9150000007' />
+              <img src={pageData.logotipas.url} />
             </div>
             <ul>
               <a href='#apie-mus'><li>APIE MUS</li></a>
@@ -190,7 +190,7 @@ export default function Home({ pageData }) {
         <div className='responsive-header'>
           <div className='wrapper'>
             <div className='logo'>
-              <img src='https://res.cloudinary.com/dxdmya6ui/image/upload/v1620821646/dazymas_logo_6e09740273.png?1246483.9150000007' />
+              <img src={pageData.logotipas.url} />
             </div>
             <div className='menu-button' onClick={() => setShowResponsiveMenu(true)}>
               <img src='https://res.cloudinary.com/dxdmya6ui/image/upload/v1620830146/menu_5fa786fcf4.svg?1828102.859999999' />
@@ -245,7 +245,7 @@ export default function Home({ pageData }) {
             <div className='right' dangerouslySetInnerHTML={{__html: `${marked(pageData.apie_mus)}`}}></div>
           </div>
         </section>
-        <section className='about-us orange-bg' id='paslaugos'>
+        <section className='about-us light-blue-bg' id='paslaugos'>
           <div className='wrapper row-reverse'>
             <div className='left'>
               <h2 className='color-white'><img src='https://res.cloudinary.com/dxdmya6ui/image/upload/v1620812848/painter_8b32ec125d.png?2150974.9950000006' />Paslaugos</h2>
@@ -366,7 +366,7 @@ export default function Home({ pageData }) {
               <b>El. paštas: </b>{ pageData.el_pastas }<br />
               <b>Adresas: </b>{ pageData.adresas }
             </p>
-            <img src='https://res.cloudinary.com/dxdmya6ui/image/upload/v1620821646/dazymas_logo_6e09740273.png?1246483.9150000007' />
+            <img src={pageData.logotipas.url} />
           </div>
         </div>
         <p style={{ textAlign: 'center' }}>© {new Date().getFullYear()}. Visos teisės saugomos.<br />Sprendimas <a href='https://northweb.lt'>northweb.lt</a></p>

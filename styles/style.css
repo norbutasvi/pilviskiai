@@ -35,8 +35,9 @@ ul {
   }
 }
 
-.orange-bg {
-  background: #D75923;
+.light-blue-bg {
+  background: -webkit-gradient(linear, left top, right top, from(#19396E), to(#377BED));
+  background: linear-gradient(to right, #19396E, #377BED);
 }
 
 .color-white {
@@ -52,15 +53,15 @@ ul {
 
 .sticky {
   background: white;
-  border-bottom: 5px solid #D75923;
+  border-bottom: 5px solid #19396E;
 }
 
 .sticky .wrapper .logo img {
-  width: 150px;
+  width: 180px;
 }
 
 .responsive-sticky {
-  border-bottom: 5px solid #D75923;
+  border-bottom: 5px solid #19396E;
 }
 
 .responsive-sticky .wrapper .logo img {
@@ -307,12 +308,11 @@ header .wrapper ul li {
 }
 
 header .wrapper ul li:hover {
-  background: #ECB27D;
-  color: black;
+  background: #19396E;
 }
 
 .hero-bg {
-  margin-top: 132px;
+  margin-top: 90px;
   height: 500px;
   background-size: cover;
   background-position: center;
@@ -320,7 +320,7 @@ header .wrapper ul li:hover {
 
 @media only screen and (max-width: 600px) {
   .hero-bg {
-    margin-top: 68px;
+    margin-top: 54px;
   }
 }
 
@@ -415,7 +415,7 @@ header .wrapper ul li:hover {
 
 .hero-bg .wrapper .right .flex-center button {
   margin-top: 10px;
-  background: #D75923;
+  background: #19396E;
   border: none;
   color: white;
   padding: 10px;
@@ -563,7 +563,8 @@ header .wrapper ul li:hover {
 }
 
 .es-projects {
-  background-color: #D75923;
+  background: -webkit-gradient(linear, right top, left top, from(#19396E), to(#377BED));
+  background: linear-gradient(to left, #19396E, #377BED);
   padding: 40px 0px;
   color: white;
 }
@@ -651,7 +652,7 @@ header .wrapper ul li:hover {
 
 .contact {
   padding: 40px 0px;
-  background: #ECB27D;
+  background: #377BED;
   color: white;
 }
 
@@ -775,6 +776,22 @@ header .wrapper ul li:hover {
 
 .contact .field-fullwidth button {
   margin-top: 1.5%;
+}
+
+.contact .MuiFormLabel-root {
+  color: white;
+}
+
+.contact .MuiButton-label {
+  color: white;
+}
+
+.contact .MuiFilledInput-input {
+  color: #b5cfff;
+}
+
+.contact .MuiFormLabel-root.Mui-focused {
+  color: white;
 }
 
 .email-loader, .success-msg {
